@@ -4,9 +4,9 @@
 	include('menu.php');
 
 	$error="";
-if((isset($_POST[username]) && $_POST[username]<>"") && (isset($_POST[pass]) && $_POST[pass]<>"") ){
+if((isset($_POST["username"]) && $_POST["username"]<>"") && (isset($_POST["pass"]) && $_POST["pass"]<>"") ){
 
-		$query="SELECT * FROM user WHERE 1 AND username='$_POST[username]' AND pass='$_POST[pass]'";
+		$query="SELECT * FROM user WHERE 1 AND username='".$_POST["username"]."' AND pass='".$_POST["pass"]."'";
 		$resource=$conn->query($query);
 		if($t=$resource->num_rows){
 		$row=$resource->fetch_assoc();

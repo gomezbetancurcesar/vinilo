@@ -4,7 +4,7 @@
    </div>
    <ul class="header_items">
      <li class="header_art"> <a href="#" title="Carrito de compras" class="ico bag"> <span>1</span> </a> </li>
-     <li class="header_art"> <a href="#" title="Login" class="ico user"></a><?php if($_SESSION[user_id]){ echo $_SESSION[name];  }?></li>
+     <li class="header_art"> <a href="#" title="Login" class="ico user"></a><?php if(isset($_SESSION["user_id"])){ echo $_SESSION["name"];  }?></li>
      <li class="header_art"> <a href="#" title="Buscar" class="ico search"></a> </li>
      <li class="header_art"> <a href="#" title="mostrar menu" class="ico ham"><span></span><span></span><span></span></a> </li>
    </ul>

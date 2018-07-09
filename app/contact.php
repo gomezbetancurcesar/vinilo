@@ -1,24 +1,37 @@
 <?php
 
-  if(isset($_POST[contact]) && $_POST[contact]=="ENVIAR"){
-    /*$queryInsert= "INSERT INTO contact (id, name, mail, asun, msj, date) VALUES (NULL,'$_POST[name]','$_POST[mail]','$_POST[asun]','$_POST[msj]',NOW())";
-    $conn->query($queryInsert);
-    $ID = $conn->insert_id;*/
-
-    $body = "El usuario ".$_POST['name']." se ha contacto con el sitio de rayitas:
-    Nombre: ".$_POST['name']."
-    Email : ".$_POST['mail']."
-    Asunto: ".$_POST['asun']."
-    Mensaje: ".$_POST['msj']."
-    ----------------------------------
-    ";
-
-    $head = "From: ".$_POST['name']."<".$_POST['mail'].">\n";
-    $head .= "Reply-To: ".$_POST['mail']."\n";
-    $head .= "Cc: zurita.salgado.fabian@gmail.com\n";
-    $destinatario .= $_POST['mail'];
-    $type = "Contacto - de -".$_POST['name'];
-    mail("$destinatario", "$type", "$body", "$head");
+  if(isset($_POST["contact"]) && $_POST["contact"]=="ENVIAR"){
+    $conexion = new Conexion();
+    $ID = $conexion->save(array(
+			"table" => "contacts",
+			"data" => array(
+				"name" => $_POST["name"],
+				"lastname" => $_POST["lastname"],
+				"mail" => $_POST["mail"],
+				"text" => $_POST["textarea"],
+				"time" => array("function" => "NOW()")
+			),
+		));
+    
+/*    
+    if($ID){
+      $body = "El usuario ".$_POST['name']." se ha contacto con el sitio de rayitas:
+      Nombre: ".$_POST['name']."
+      Email : ".$_POST['mail']."
+      Asunto: ".$_POST['asun']."
+      Mensaje: ".$_POST['msj']."
+      ----------------------------------
+      ";
+  
+      $head = "From: ".$_POST['name']."<".$_POST['mail'].">\n";
+      $head .= "Reply-To: ".$_POST['mail']."\n";
+      $head .= "Cc: zurita.salgado.fabian@gmail.com\n";
+      $destinatario .= $_POST['mail'];
+      $type = "Contacto - de -".$_POST['name'];
+      mail("$destinatario", "$type", "$body", "$head");
+    }
+*/
+    
     //if($ID) header("Location: index.php");
   }
 ?>

@@ -2,11 +2,19 @@
   include('header.php');
   include('menu.php');
 
-
-  if(isset($_POST[crear]) && $_POST[crear]=="Crear"){
-    $queryInsert= "INSERT INTO user (id, username, name, mail, pass, time, isadmin) VALUES (NULL,'$_POST[username]', '$_POST[name]','$_POST[mail]', '$_POST[pass]',NOW(), 0)";
-    $conn->query($queryInsert);
-    $ID = $conn->insert_id;
+  if(isset($_POST["crear"]) && $_POST["crear"]=="Crear"){
+		$conexion = new Conexion();
+		$ID = $conexion->save(array(
+			"table" => "user",
+			"data" => array(
+				"username" => $_POST["username"],
+				"name" => $_POST["name"],
+				"mail" => $_POST["mail"],
+				"pass" => $_POST["pass"],
+				"time" => array("function" => "NOW()"),
+				"isadmin" => "0"
+			),
+		));
 
   /*$cuerpo="El usuario ".$_POST['name']." Se ha registrado en la super tienda de rayitas:
 	Nombre: ".$_POST['name']."
@@ -120,7 +128,6 @@
     </div>
   </div>
 </section>
-
 
 <!--Formulario Registro-->
 <?php include('footer.php'); ?>

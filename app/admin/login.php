@@ -1,21 +1,33 @@
 <?php require_once('../conection.php');
 
+$error = null;
 if(!isset($_SESSION))session_start();
 
-if((isset($_POST[username]) && $_POST[username]<>"") && (isset($_POST[pass]) && $_POST[pass]<>"") ){
-		$query="SELECT * FROM clients WHERE 1 AND username='$_POST[username]' AND pass='$_POST[pass]' AND admin='1' ";
-		$resource=$conn->query($query);
-		if($t=$resource->num_rows){
-		$row=$resource->fetch_assoc();
-		$_SESSION[adminid]=$row[id];
-		$_SESSION[name]=$row[name];
-		$_SESSION[mail]=$row[mail];
-		$_SESSION[tel]=$row[tel];
-		$_SESSION[country]=$row[country];
-		$_SESSION[adress]=$row[adress];
-
-		$volver=($_SESSION[volverad])?$_SESSION[volverad]:"index.php";
-	  header("Location: ".$volver);
+if(!empty($_POST)){
+	if((isset($_POST["username"]) && $_POST["username"]<>"") && (isset($_POST["pass"]) && $_POST["pass"]<>"") ){
+		$conexion = new Conexion();
+		$usuario = $conexion->find("first", array(
+			"table" => "user",
+			"where" => array(
+				"username" => $_POST["username"],
+				"pass" => $_POST["pass"],
+				"isadmin" => 1
+			)
+		));
+		
+		if(!empty($usuario)){
+			$_SESSION["adminid"]=$usuario["id"];
+			$_SESSION["name"]=$usuario["name"];
+			//$_SESSION["mail"]=$usuario["mail"];
+			//$_SESSION["tel"]=$usuario["tel"];
+			//$_SESSION["country"]=$usuario["country"];
+			//$_SESSION["adress"]=$usuario["adress"];
+			
+			$volver=($_SESSION["volverad"])?$_SESSION["volverad"]:"index.php";
+			header("Location: ".$volver);
+		}else{
+			$error="Usuario/Clave no registrados";
+		}
 	} else {
 		$error="Usuario/Clave no registrados";
 	}
