@@ -1,4 +1,5 @@
-<?php require_once('../conection.php');
+<?php 
+require_once('../conection.php');
 
 if(!isset($_SESSION))session_start();
 
@@ -19,6 +20,7 @@ if(!$_SESSION['adminid']){
     <link rel="stylesheet" href="assets/css/app.css">
     <!--JS-->
     <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/popper.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/global.js"></script>
   </head>

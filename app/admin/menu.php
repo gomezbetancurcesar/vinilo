@@ -1,7 +1,8 @@
 <?php
   $pages = array();
-  $pages["index.php"] = "Inicio";
-  $pages["producto-agregar.php"] = "Agregar Producto";
+  //$pages["index.php"] = "Inicio";
+  //$pages["productos-agregar.php"] = "Agregar Producto";
+  $pages["productos-index.php"] = "Productos";
 ?>
 
 <header class="container">
@@ -22,7 +23,7 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Ingrese su búsqueda" aria-label="Ingrese su búsqueda" name="search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
-      <?php if($_SESSION[adminid]){?><a href="logout.php" class="btn btn-outline-danger my-2 my-sm-0">Cerrar Sesión</a><?php }?>
+      <?php if($_SESSION["adminid"]){?><a href="logout.php" class="btn btn-outline-danger my-2 my-sm-0">Cerrar Sesión</a><?php }?>
     </div>
   </nav>
 </header>

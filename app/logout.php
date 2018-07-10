@@ -4,5 +4,4 @@ foreach($_SESSION as $k => $v){
 $_SESSION[$k] = NULL;
 }
 session_destroy();
-header("Location: login.php");
-?>
+header("Location: index.php");

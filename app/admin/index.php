@@ -6,17 +6,17 @@
   $max = 5;
   $pag = 0;
 
-  if(isset($_GET[idDelete]) && $_GET[idDelete]<> ""){
+  if(isset($_GET["idDelete"]) && $_GET["idDelete"]<> ""){
     $queryDelete = "DELETE FROM producto WHERE id=$_GET[idDelete]";
     $conn->query($queryDelete);
   }
 
-  if(isset($_GET[pag]) && $_GET[pag] <> ""){
-    $pag = $_GET[pag];
+  if(isset($_GET["pag"]) && $_GET["pag"] <> ""){
+    $pag = $_GET["pag"];
   }
 
-  if(isset($_GET[search]) && $_GET[search] <> ""){
-    $query = "SELECT id, name, phrase_sale, price, code, sale FROM producto WHERE (`name` LIKE '%".$_GET[search]."%')";
+  if(isset($_GET["search"]) && $_GET["search"] <> ""){
+    $query = "SELECT id, name, phrase_sale, price, code, sale FROM producto WHERE (`name` LIKE '%".$_GET["search"]."%')";
   }else{
     $query = "SELECT id, name, phrase_sale, price, code, sale FROM producto";
   }
@@ -26,8 +26,8 @@
   $resource = $conn->query($query_limit);
   $total = $resource->num_rows;
 
-  if (isset($_GET[total])) {
-    $total = $_GET[total];
+  if (isset($_GET["total"])){
+    $total = $_GET["total"];
   } else {
     $resource_total = $conn -> query($query);
     $total = $resource_total->num_rows;

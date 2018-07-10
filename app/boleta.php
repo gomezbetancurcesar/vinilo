@@ -3,6 +3,55 @@
   //$activePage = "boleta.php";
   include('menu.php');
 
+  if(isset($_GET["action"])){
+    $carroSession = array();
+    if(isset($_SESSION["carrito"])) $carroSession = $_SESSION["carrito"];
+
+    switch ($_GET["action"]){
+      case 'add':
+        $conexion = new Conexion();
+        $producto = $conexion->find("first", array(
+                        "table" => "products",
+                        "where" => array(
+                          "id" => $_GET["id"]
+                        )
+        ));
+        $key = false;
+        foreach ($carroSession as $k => $carro){
+          if($carro["id"] == $_GET["id"]){
+            debug("aca");
+            $key = $k;
+            $producto["cantidad"] = $carro["cantidad"] + 1;
+            break;
+          }
+        }
+
+        if($key !== false){
+          $carroSession[$key] = $producto;
+        }else{
+          $producto["cantidad"] = 1;
+          $carroSession[] = $producto;
+        }
+        $_SESSION["carrito"] = $carroSession;
+        break;
+      case "remove":
+        foreach ($carroSession as $key => $carro){
+          if($carro["id"] == $_GET["id"]){
+            if($carro["cantidad"] == 1){
+              unset($carroSession[$key]);
+            }else{
+              $carroSession[$key]["cantidad"] = $carro["cantidad"] - 1;
+            }
+          }
+        }
+        $_SESSION["carrito"] = $carroSession;
+        break;
+    }
+
+    $volver=($_SESSION["volver"])?$_SESSION["volver"]:"/boleta.php";
+    header("Location: ".$volver);
+  }
+
   /*if(isset($_GET[idElm]) && $_GET[idElm]<> ""){
     $queryDelete = "DELETE FROM compras WHERE id=$_GET[idElm]";
     $conn->query($queryDelete);
@@ -12,7 +61,6 @@
   $total = $resource->num_rows;*/
 ?>
 <!--Body of content-->
-
 <?php /*<section class="landing">
   <div class="container">
     <h1>Boleta <span class="badge badge-secondary">Detalles</span></h1>
@@ -98,16 +146,31 @@
   <div class="bag_row">
     <h3>Carrito de compras</h3>
     <div class="bag_list">
+      <?php
+        $resumen = array(
+          "cantidad" => 0,
+          "total" => 0
+        );
+        if(isset($_SESSION["carrito"]) && !empty($_SESSION["carrito"])){
+          foreach ($_SESSION["carrito"] as $key => $carrito){
+            $resumen["cantidad"] += $carrito["cantidad"];
+            $resumen["total"] += ($carrito["cantidad"] * $carrito["price"]);
 
-      <div class="bag_item">
-        <div class="">
-          <a href="#" class="bag_title">The World Wont listen</a>
-          <p class="bag_subtitle">The submit</p>
-          <a href="#" class="bag_close">close</a>
-        </div>
-        <p class="bag_price">$2000</p>
-      </div>
+            ?>
+            <div class="bag_item">
+              <div class="">
+                <a href="/producto.php?id=<?=$carrito["id"];?>" class="bag_title"><?=$carrito["name"];?></a>
+                <p class="bag_subtitle"><?=$carrito["artista"];?></p>
+                <a href="/boleta.php?action=remove&id=<?=$carrito["id"];?>" class="bag_close">close</a>
+              </div>
+              <p class="bag_price"><?=$carrito["cantidad"]." x ".peso($carrito["price"]);?></p>
+            </div>
+            <?php
+          }
+        }else{
 
+        }
+      ?>
     </div>
   </div>
   <div class="bag_content">
@@ -115,11 +178,11 @@
     <div class="bag_info">
       <div class="">
         <p class="bag_span">Cantidad</p>
-        <p class="bag_import">3 Vinilos</p>
+        <p class="bag_import"><?php echo $resumen["cantidad"];  echo ($resumen["cantidad"]>1?" Vinilos":" Vinilo"); ?> </p>
       </div>
       <div class="">
         <p class="bag_span">Total</p>
-        <p class="bag_import">$12.000</p>
+        <p class="bag_import"><?=peso($resumen["total"]);?></p>
       </div>
       <div class="">
         <a href="#" class="link red">Pagar</a>

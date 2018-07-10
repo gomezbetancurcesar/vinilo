@@ -4,22 +4,24 @@
 	include('menu.php');
 
 	$error="";
-if((isset($_POST["username"]) && $_POST["username"]<>"") && (isset($_POST["pass"]) && $_POST["pass"]<>"") ){
+  if((isset($_POST["username"]) && $_POST["username"]<>"") && (isset($_POST["pass"]) && $_POST["pass"]<>"") ){
+    $conexion = new Conexion();
+    $usuario = $conexion->find("first", array(
+                              "table" => "user",
+                              "where" => array(
+                                "username" => $_POST["username"],
+                                "pass" => $_POST["pass"],
+                              )
+    ));
+		$_SESSION["user_id"]=$usuario["id"];
+		$_SESSION["name"]=$usuario["name"];
+		$_SESSION["mail"]=$usuario["mail"];
 
-		$query="SELECT * FROM user WHERE 1 AND username='".$_POST["username"]."' AND pass='".$_POST["pass"]."'";
-		$resource=$conn->query($query);
-		if($t=$resource->num_rows){
-		$row=$resource->fetch_assoc();
-		$_SESSION[user_id]=$row[id];
-		$_SESSION[name]=$row[name];
-		$_SESSION[mail]=$row[mail];
-
-		$volver=($_SESSION[volver])?$_SESSION[volver]:"index.php";
-	header("Location: ".$volver);
+		$volver=($_SESSION["volver"])?$_SESSION["volver"]:"index.php";
+	 header("Location: ".$volver);
 	} else {
 		$error="Usuario/Clave no registrados";
 	}
-}
 ?>
 
 <?php /*<!DOCTYPE html>

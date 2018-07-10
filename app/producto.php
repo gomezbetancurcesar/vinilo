@@ -4,6 +4,14 @@
 
   $errorPage = 0;
 
+  $conexion = new Conexion();
+  $producto = $conexion->find("first", array(
+                              "table" => "products",
+                              "where" => array(
+                                "id" => $_GET["id"]
+                              )
+  ));
+
   //Validación de ID
   /*if($_GET[id] == ""){
     $errorPage = 1;
@@ -77,21 +85,24 @@
       <img src="assets/img/error.png" alt="error 500">
   <?php } ?>
   </div>
-</section>*/?>
+</section>*/
+  $imgDefault = "dist/images/item-view.jpg";
+  $img = "/img/".$producto["code"].".jpg";
+?>
 
 <section class="banner">
   <div class="banner_content">
     <div class="banner_info">
-      <h2>The worl wont list</h2>
-      <p class="banner_subtitle">The Smiths</p>
-      <p class="banner_letext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales nibh quis mi scelerisque hendrerit non sed ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales nibh quis mi scelerisque hendrerit non sed ante.</p>
-      <p class="banner_price">$10.000</p>
+      <h2><?=$producto["name"];?></h2>
+      <p class="banner_subtitle"><?=$producto["artista"];?></p>
+      <p class="banner_letext"><?=nl2br($producto["text"]);?></p>
+      <p class="banner_price"><?=peso($producto["price"]);?></p>
     </div>
     <div class="banner_slide">
       <div class="banner_item">
-        <img src="dist/images/item-view.jpg" alt="imagen banner">
+        <img src="<?=$img;?>" alt="imagen banner">
         <div class="buttom">
-          <a href="#" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
+          <a href="/boleta.php?action=add&id=<?=$producto["id"];?>" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
         </div>
         <!---->
       </div>

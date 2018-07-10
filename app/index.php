@@ -3,6 +3,10 @@
   $activePage = "index.php";
   include('menu.php');
 
+  $conexion = new Conexion();
+  $productos = $conexion->find("all", array(
+                              "table" => "products"
+  ));
   /*$max = 5;
   $pag = 0;
 
@@ -81,22 +85,23 @@
       </ul>
     </nav>
   </div>
-</section>*/ ?>
-
+</section>*/ 
+?>
 <section class="banner">
   <div class="banner_content">
     <div class="banner_info">
     </div>
     <div class="banner_slide">
       <div class="banner_item">
-        <img src="dist/images/miriam-hernandez.png" alt="imagen banner">
+        <?php
+          $img = "/img/".$productos[0]["code"].".jpg";
+        ?>
+        <img src="<?=$img;?>" alt="imagen banner">
         <div class="banner_text">
-          <p>Album lorem ipsum</p>
-          <h2 class="banner_title">Miriam Hérnandez <span>$10.000</span></h2>
+          <p><?=$productos[0]["name"];?></p>
+          <h2 class="banner_title"><?=$productos[0]["artista"];?><span><?=peso($productos[0]["price"]);?></span></h2>
         </div>
-        <!---->
       </div>
-
     </div>
   </div>
   <div class="banner_aside">
@@ -106,12 +111,11 @@
       <a href="#" title="Ir a youtube" class="rrss_item ico youtube">youtube</a>
     </div>
     <div class="buttom">
-      <a href="#" title="Ver más" class="rrss_item ico arrow">ver más</a>
-      <a href="#" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
+      <a href="/producto.php?id=<?=$productos[0]["id"];?>" title="Ver más" class="rrss_item ico arrow">ver más</a>
+      <a href="/boleta.php?action=add&id=<?=$productos[0]["id"];?>" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
     </div>
   </div>
 </section>
-
 
 <?php include('contact.php'); ?>
 <!--End of content-->

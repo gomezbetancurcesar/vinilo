@@ -2,7 +2,7 @@
   include('header.php');
   include('menu.php');
 
-  if(isset($_GET[validate]) && $_GET[validate] == 1){
+  if(isset($_GET["validate"]) && $_GET["validate"] == 1){
     $query="SELECT * FROM clients WHERE 1 AND id='$_SESSION[user_id]'";
     $resource = $conn->query($query);
     $row = $resource->fetch_assoc();
@@ -23,10 +23,6 @@
     $type = "Venta de rayitas desde el sitio web";
     mail("$destinatario", "$type", "$body", "$head");
   }
-  
-  
-  
-  
 ?>
 <section>
 </section>
