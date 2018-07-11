@@ -23,7 +23,7 @@ if(!empty($_POST)){
 			//$_SESSION["country"]=$usuario["country"];
 			//$_SESSION["adress"]=$usuario["adress"];
 			
-			$volver=($_SESSION["volverad"])?$_SESSION["volverad"]:"index.php";
+			$volver=($_SESSION["volverad"])?$_SESSION["volverad"]:"productos-index.php";
 			header("Location: ".$volver);
 		}else{
 			$error="Usuario/Clave no registrados";

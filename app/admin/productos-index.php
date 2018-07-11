@@ -61,7 +61,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                       <a class="dropdown-item" href="productos-formulario.php?id=<?=$producto["id"]?>">Editar</a>
-                      <a class="dropdown-item" href="#">Tracklist</a>
+                      <a class="dropdown-item" href="tracklists-index.php?productoId=<?=$producto["id"]?>">Tracklist</a>
                        <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="productos-formulario.php?action=remove&id=<?=$producto["id"]?>">Eliminar</a>
                     </div>

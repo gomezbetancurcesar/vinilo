@@ -3,6 +3,7 @@
   //$pages["index.php"] = "Inicio";
   //$pages["productos-agregar.php"] = "Agregar Producto";
   $pages["productos-index.php"] = "Productos";
+  $pages["contactos-index.php"] = "Contactos";
 ?>
 
 <header class="container">

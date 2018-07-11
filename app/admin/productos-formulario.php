@@ -1,10 +1,14 @@
 <?php
   include('header.php');
-  $activePage = "producto-agregar.php";
+  $activePage = "productos-index.php";
   include('menu.php');
   $conexion = new Conexion();
 
   $producto = array();
+
+  $label = "Agregar producto";
+  $subtitulo = "Crear nuevo";
+
   if(isset($_POST["registrar"]) && $_POST["registrar"]=="Registrar"){
     $array = array(
       "table" => "products",
@@ -36,6 +40,8 @@
 
   }else{
     if(isset($_GET["id"])){
+      $label = "Editar producto";
+      $subtitulo = "Editar datos";
       $producto = $conexion->find("first", array(
                                 "table" => "products",
                                 "where" => [
@@ -57,7 +63,7 @@
 <!--Formulario Registro-->
 <section>
   <div class="container">
-    <h1>Agregar producto <span class="badge badge-secondary">Crear Nuevo</span></h1>
+    <h1><?=$label;?> <span class="badge badge-secondary"><?=$subtitulo;?></span></h1>
     <!--ssasasas-->
     <form id="registrar" name="registrar" method="post" action="" enctype="multipart/form-data">
       <?php

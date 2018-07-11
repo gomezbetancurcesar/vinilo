@@ -86,6 +86,7 @@ class Conexion {
 		}
     	$this->conn->query($query);
     	$id = $this->conn->insert_id;
+    	$this->conn->close();
 		return $id;
 	}
 	
@@ -131,6 +132,14 @@ class Conexion {
 					break;
 			}
 		}
+		// $this->conn->close();
 		return $row;
+	}
+
+	public function delete($table, $id){
+		$query = "delete from $table where id = $id";
+		$retorno = $this->conn->query($query);
+		$this->conn->close();
+		return $retorno;
 	}
 }
