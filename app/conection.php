@@ -101,6 +101,10 @@ class Conexion {
 			$query .= " where ";
 			foreach($where as $campo => $valor){
 				$value = null;
+				if($campo == "_like_"){
+					$query .= "$valor AND ";
+					continue;
+				}
 				if(!is_array($valor)){
 					if(is_numeric($valor)) $value = $valor;
 					else $value = "'$valor'";
@@ -112,6 +116,7 @@ class Conexion {
 		}
 		$query = trim(trim($query), "AND");
 		if($debug){
+			debug($opts);
 			debug($query);
 			die();
 		}

@@ -92,13 +92,13 @@ $(document).ready(function () {
     }, 800);
   }
 
-  $('.ico.ham').click(function (e) {
+  $("body").on("click", '.ico.ham', function (e) {
     e.preventDefault();
     $('.header_modal').toggleClass('active');
     $(this).toggleClass('active');
   });
 
-  $('.bio_item').click(function (e) {
+  $("body").on("click", '.bio_item', function (e) {
     $('.bio_list').find('.active').removeClass('active');
     $(this).addClass('active');
   });

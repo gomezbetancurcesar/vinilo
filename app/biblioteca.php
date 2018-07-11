@@ -86,32 +86,17 @@
 <section class="bio">
   <div class="bio_row">
     <h3>Biblioteca</h3>
-    <input type="text" name="search_list" value="" placeholder="Artista o album" class="bio_intext">
+    <form action="biblioteca_resultado.php" method="post" class="formBusquedaBiblioteca">
+      <input type="text" name="busqueda" value="" placeholder="Artista o album" class="bio_intext inputBuscador">
+    </form>
+    <div class="palabrasBusqueda">
+    </div>
   </div>
   <div class="bio_content">
-    <h2>Nombre de lo que esta buscando</h2>
-    <div class="bio_list">
-      <div class="bio_item active">
-        <img src="" alt="">
-        <h4>The world wont listen</h4>
-        <p class="bio_subtitle">the smith</p>
-        <p class="bio_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .</p>
-        <div class="buttom">
-          <a href="#" title="Ver más" class="rrss_item ico arrow">ver más</a>
-          <a href="#" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
-        </div>
-      </div>
-      <div class="bio_item">
-        <img src="" alt="">
-        <h4>The world wont listen</h4>
-        <p class="bio_subtitle">the smith</p>
-        <p class="bio_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .</p>
-        <div class="buttom">
-          <a href="#" title="Ver más" class="rrss_item ico arrow">ver más</a>
-          <a href="#" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
-        </div>
-      </div>
+    <h2 class="textoBuscado">Nombre de lo que esta buscando</h2>
+    <div class="resultadoBusqueda">
     </div>
+  </div>
   <div class="bio_aside">
     <div class="rrss">
       <a href="#" title="Ir a facebook" class="rrss_item ico facebook">facebook</a>
@@ -120,8 +105,37 @@
     </div>
   </div>
 </section>
-
-
 <?php include('contact.php'); ?>
 <!--End of content-->
 <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var timeout;
+    $("body").off("keyup", ".inputBuscador");
+    $("body").on("keyup", ".inputBuscador", function(e){
+      clearTimeout(timeout);
+      let valor = $(this).val();
+      if(valor != ""){
+        timeout = setTimeout(function(){
+          let url = $(".formBusquedaBiblioteca").attr("action");
+          $.ajax({
+            url: url,
+            type: "post",
+            data: $(".formBusquedaBiblioteca").serialize(),
+            beforeSend: function(){},
+            success:function(response){
+              $(".textoBuscado").html("Resultados para '"+valor+"'")
+              $(".resultadoBusqueda").html(response);
+            },
+            complete: function(status, xhr){
+            }
+          })
+        }, 500);
+      }else{
+        $(".resultadoBusqueda").html("");
+        $(".textoBuscado").html("Nombre de lo que esta buscando")
+      }
+    });
+  });
+</script>

@@ -1,11 +1,25 @@
 <?php
   require_once('conection.php');
+  $conexion = new Conexion();
   $where = array();
-  if(isset($_GET["id"]))
-    $where["id !"] = $_GET["id"];
+  $formAction = "carrusel_productos.php";
 
-  if(isset($_POST["id"]))
+  if(isset($_GET["id"])){
+    $where["id !"] = $_GET["id"];
+    $formAction .= "?id=".$_GET["id"];
+  }
+
+  if(isset($_POST["id"])){
     $where["id !"] = $_POST["id"];
+    $formAction .= "?id=".$_POST["id"];;
+  }
+
+  $debug = false;
+  $busqueda = false;
+  if(isset($_POST["busqueda"])){
+    $busqueda = $_POST["busqueda"];
+    $where["_like_"] = "(lower(name) like '%".strtolower($_POST["busqueda"])."%' or lower(artista) like '%".strtolower($_POST["busqueda"])."%')";
+  }
 
   $productos = $conexion->find("all", array(
                               "table" => "products",
@@ -24,9 +38,9 @@
   <?php 
     if($buscador){
       ?>
-      <form class="find_form" action="index.php" method="post">
+      <form class="find_form buscadorCarrusel" action="<?=$formAction;?>" method="post">
         <fieldset>
-          <input type="text" name="" value="" placeholder="Busca tu musica">
+          <input type="text" name="busqueda" value="<?=$busqueda;?>" placeholder="Busca tu música" class="inputBuscadorCarrusel"/>
         </fieldset>
       </form>
       <?php
@@ -58,3 +72,36 @@
      ?>
   </div>
 </section>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var timeout;
+    $("body").off("keyup", ".inputBuscadorCarrusel");
+    $("body").on("keyup", ".inputBuscadorCarrusel", function(e){
+      clearTimeout(timeout);
+      timeout = setTimeout(function(){
+        let url = $(".buscadorCarrusel").attr("action");
+        $.ajax({
+          url: url,
+          type: "post",
+          data: $(".buscadorCarrusel").serialize(),
+          beforeSend: function(){},
+          success:function(response){
+            $(".contenedorCarusel").html(response);
+            $('.carrusel').slick({
+              infinite: false,
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              autoplay: true,
+              autoplaySpeed: 5000,
+              arrows: true
+            });
+          },
+          complete: function(status, xhr){
+
+          }
+        })
+      }, 500);
+    });
+  });
+</script>
