@@ -5,7 +5,6 @@
   $pages["productos-index.php"] = "Productos";
   $pages["contactos-index.php"] = "Contactos";
 ?>
-
 <header class="container">
   <h4>Administrador</h4>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">

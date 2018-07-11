@@ -1,19 +1,21 @@
 <?php
-  include('header.php');
+  require_once('../conection.php');
   $activePage = "productos-index.php";
-  include('menu.php');
   $conexion = new Conexion();
-
   if(isset($_GET["id"])){
     if($_GET["action"] == "remove"){
       $conexion->delete("tracklists", $_GET["id"]);
       header("Location: tracklists-index.php?productoId=".$_GET["productoId"]);
+      die();
     }
   }
   $canciones = $conexion->find("all", array(
                           "table" => "tracklists",
                           "where" => array("product_id" => $_GET["productoId"])
   ));
+
+  include('header.php');
+  include('menu.php');
 ?>
 <!--Formulario Registro-->
 <section>

@@ -1,13 +1,11 @@
 <?php 
 require_once('../conection.php');
-
 if(!isset($_SESSION))session_start();
-
 if(!$_SESSION['adminid']){
   $_SESSION[volverad] = $_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING'];
   header('Location: login.php');
+  die();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,4 +29,3 @@ if(!$_SESSION['adminid']){
       $pages["boleta.php"] = "Boleta";
       $pages["producto.php"] = "Producto";
       $pages["registro.php"] = "Registro";
-    ?>

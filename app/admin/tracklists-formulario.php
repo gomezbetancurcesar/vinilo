@@ -1,7 +1,6 @@
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <?php 
-    include('header.php');
+<?php 
+    require_once('../conection.php');
+    //include('header.php');
     $conexion = new Conexion();
 
     $label = "Agregar canción";
@@ -19,9 +18,11 @@
         $array["where"]["id"] = $_POST["id"];
         $conexion->save($array);
         header("Location: tracklists-index.php?productoId=".$_GET["productoId"]);
+        die();
       }else{
         $ID = $conexion->save($array);
-        if($ID) header("Location: tracklists-index.php?productoId=".$_GET["productoId"]);
+        header("Location: tracklists-index.php?productoId=".$_GET["productoId"]);
+        die();
       }
     }else{
       if(isset($_GET["id"])){
@@ -44,6 +45,8 @@
     ));
     //debug($producto);
   ?>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->

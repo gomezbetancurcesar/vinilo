@@ -25,6 +25,7 @@ if(!empty($_POST)){
 			
 			$volver=($_SESSION["volverad"])?$_SESSION["volverad"]:"productos-index.php";
 			header("Location: ".$volver);
+      die();
 		}else{
 			$error="Usuario/Clave no registrados";
 		}

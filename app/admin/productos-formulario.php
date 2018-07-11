@@ -1,7 +1,6 @@
 <?php
-  include('header.php');
+  require_once('../conection.php');
   $activePage = "productos-index.php";
-  include('menu.php');
   $conexion = new Conexion();
 
   $producto = array();
@@ -33,9 +32,11 @@
       $array["where"]["id"] = $_POST["id"];
       $conexion->save($array);
       header("Location: productos-index.php");
+      die();
     }else{
       $ID = $conexion->save($array);
-      if($ID) header("Location: productos-index.php");
+      header("Location: productos-index.php");
+      die();
     }
 
   }else{
@@ -50,6 +51,9 @@
       ));
     }
   }
+
+  include('header.php');
+  include('menu.php');
 
   $categorias = $conexion->find("list", array(
                       "table" => "products",

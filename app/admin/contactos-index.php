@@ -1,7 +1,6 @@
 <?php
-  include('header.php');
+  require_once('../conection.php');
   $activePage = "contactos-index.php";
-  include('menu.php');
   $conexion = new Conexion();
 
   if(isset($_GET["id"]) && isset($_GET["leido"])){
@@ -11,8 +10,11 @@
       "data" => array("leido" => $_GET["leido"])
     ));
     header("Location: contactos-index.php");
+    die();
   }
 
+  include('header.php');
+  include('menu.php');
   $contactos = $conexion->find("all", array(
                       "table" => "contacts"
   ));

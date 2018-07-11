@@ -86,7 +86,7 @@ class Conexion {
 		}
     	$this->conn->query($query);
     	$id = $this->conn->insert_id;
-    	$this->conn->close();
+    	// $this->conn->close();
 		return $id;
 	}
 	
