@@ -4,7 +4,7 @@
    </div>
    <ul class="header_items">
      <li class="header_art">
-        <a href="/boleta.php" title="Carrito de compras" class="ico bag"> 
+        <a href="/boleta.php" title="Carrito de compras" class="ico bag">
           <?php
             if(isset($_SESSION["carrito"]) && !empty($_SESSION["carrito"])){
               ?>
@@ -12,7 +12,7 @@
               <?php
             }
           ?>
-        </a> 
+        </a>
       </li>
       <?php
         if(isset($_SESSION["user_id"])){
@@ -25,7 +25,7 @@
           <?php
         }
       ?>
-     <li class="header_art"> <a href="#" title="Buscar" class="ico search"></a> </li>
+     <li class="header_art"> <a href="/biblioteca.php" title="Buscar" class="ico search"></a> </li>
      <li class="header_art"> <a href="#" title="mostrar menu" class="ico ham"><span></span><span></span><span></span></a> </li>
    </ul>
    <div class="header_modal">

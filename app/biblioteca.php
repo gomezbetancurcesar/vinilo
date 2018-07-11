@@ -89,7 +89,7 @@
     <input type="text" name="search_list" value="" placeholder="Artista o album" class="bio_intext">
   </div>
   <div class="bio_content">
-    <h2>RESUMEN Y BOLETA</h2>
+    <h2>Nombre de lo que esta buscando</h2>
     <div class="bio_list">
       <div class="bio_item active">
         <img src="" alt="">

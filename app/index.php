@@ -1,12 +1,17 @@
 <?php
-  include('header.php');
   $activePage = "index.php";
+  include('header.php');
   include('menu.php');
-
   $conexion = new Conexion();
-  $productos = $conexion->find("all", array(
+  $producto = $conexion->find("first", array(
                               "table" => "products"
   ));
+
+  $canciones = $conexion->find("all", array(
+                              "table" => "tracklists",
+                              "where" => array("product_id" => $producto["id"])
+  ));
+
   /*$max = 5;
   $pag = 0;
 
@@ -85,23 +90,33 @@
       </ul>
     </nav>
   </div>
-</section>*/ 
+</section>*/
 ?>
 <section class="banner">
   <div class="banner_content">
     <div class="banner_info">
+      <h2>Lista de canciones</h2>
+      <ul>
+        <?php
+          foreach ($canciones as $key => $cancion){
+            ?>
+              <li><?=$cancion["nombre"];?></li>
+            <?php
+          }
+        ?>
+      </ul>
     </div>
     <div class="banner_slide">
       <div class="banner_item">
-        <?php
-          $img = "/img/".$productos[0]["code"].".jpg";
-        ?>
-        <img src="<?=$img;?>" alt="imagen banner">
-        <div class="banner_text">
-          <p><?=$productos[0]["name"];?></p>
-          <h2 class="banner_title"><?=$productos[0]["artista"];?><span><?=peso($productos[0]["price"]);?></span></h2>
+          <?php
+            $img = "/img/".$producto["code"].".jpg";
+          ?>
+          <img src="<?=$img;?>" alt="imagen banner">
+          <div class="banner_text">
+            <p><?=$producto["name"];?></p>
+            <h2 class="banner_title"><?=$producto["artista"];?><span><?=peso($producto["price"]);?></span></h2>
+          </div>
         </div>
-      </div>
     </div>
   </div>
   <div class="banner_aside">
@@ -111,12 +126,14 @@
       <a href="#" title="Ir a youtube" class="rrss_item ico youtube">youtube</a>
     </div>
     <div class="buttom">
-      <a href="/producto.php?id=<?=$productos[0]["id"];?>" title="Ver más" class="rrss_item ico arrow">ver más</a>
-      <a href="/boleta.php?action=add&id=<?=$productos[0]["id"];?>" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
+      <a href="/producto.php?id=<?=$producto["id"];?>" title="Ver más" class="rrss_item ico arrow">ver más</a>
+      <a href="/boleta.php?action=add&id=<?=$producto["id"];?>" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
     </div>
   </div>
 </section>
-
+<div class="contenedorCarusel">
+  <?php include('carrusel_productos.php'); ?>
+</div>
 <?php include('contact.php'); ?>
 <!--End of content-->
 <?php include('footer.php'); ?>

@@ -17,15 +17,15 @@ function peso($numero = 0){
 }
 
 class Conexion {
-	// public $hostname = "192.168.1.18";
-	// public $username = "root";
-	// public $password = "Nksp.2050!";
-	// public $database = "scraping_test";
-
-	public $hostname = "127.0.0.1";
+	public $hostname = "192.168.1.18";
 	public $username = "root";
-	public $password = "";
-	public $database = "vinitrola";
+	public $password = "Nksp.2050!";
+	public $database = "scraping_test";
+
+	// public $hostname = "127.0.0.1";
+	// public $username = "root";
+	// public $password = "";
+	// public $database = "vinitrola";
 	public $conn;
 	
 	function __construct(){
@@ -90,7 +90,7 @@ class Conexion {
 		return $id;
 	}
 	
-	public function find($type="all", $opts=array()){
+	public function find($type="all", $opts=array(), $debug=false){
 		$tabla = $opts["table"];
 		$where = (isset($opts["where"]))?$opts["where"]:array();
 		$fields= (isset($opts["fields"]))?$opts["fields"]:"*";
@@ -111,6 +111,10 @@ class Conexion {
 			}
 		}
 		$query = trim(trim($query), "AND");
+		if($debug){
+			debug($query);
+			die();
+		}
 		$resource = $this->conn->query($query);
 		
 		$row = array();

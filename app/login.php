@@ -1,8 +1,5 @@
-<?php //require_once('conection.php');
-
-	include('header.php');
-	include('menu.php');
-
+<?php 
+  require_once('conection.php');
 	$error="";
   if((isset($_POST["username"]) && $_POST["username"]<>"") && (isset($_POST["pass"]) && $_POST["pass"]<>"") ){
     $conexion = new Conexion();
@@ -19,9 +16,13 @@
 
 		$volver=($_SESSION["volver"])?$_SESSION["volver"]:"index.php";
 	 header("Location: ".$volver);
+   die();
 	} else {
 		$error="Usuario/Clave no registrados";
 	}
+
+  include('header.php');
+  include('menu.php');
 ?>
 
 <?php /*<!DOCTYPE html>

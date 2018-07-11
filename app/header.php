@@ -17,10 +17,13 @@ if(!isset($_SESSION))session_start();
     <!--css-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700" rel="stylesheet">
     <!--<link rel="stylesheet" href="assets/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="dist/css/slick.css">
+    <link rel="stylesheet" href="dist/css/slick-theme.css">
     <link rel="stylesheet" href="dist/css/app.css">
     <!--js-->
     <script src="dist/js/jquery.min.js"></script>
     <!--<script src="assets/js/bootstrap.min.js"></script>-->
+    <script src="dist/js/slick.min.js"></script>
     <script src="dist/js/app.js"></script>
   </head>
   <body>

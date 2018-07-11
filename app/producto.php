@@ -101,7 +101,7 @@
     <div class="banner_slide">
       <div class="banner_item">
         <img src="<?=$img;?>" alt="imagen banner">
-        <div class="buttom">
+        <div class="buttom alone">
           <a href="/boleta.php?action=add&id=<?=$producto["id"];?>" title="Agregar al carro" class="rrss_item ico shop">carrito</a>
         </div>
         <!---->
@@ -118,6 +118,13 @@
   </div>
 </section>
 
+<div class="contenedorCarusel">
+  <?php 
+    $cabeceraCarrusel = "Discos relacionados";
+    $buscador = false;
+    include('carrusel_productos.php');
+  ?>
+</div>
 
 <!--End of content-->
 <?php include('footer.php'); ?>

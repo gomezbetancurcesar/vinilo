@@ -4016,12 +4016,25 @@ h3 {
   z-index: 1;
   width: 100%;
   max-width: 720px;
+  text-align: center;
 }
 
 .banner_info h2 {
   font-size: 3.1rem;
   font-weight: lighter;
   color: #A81E1E;
+  margin-bottom: 10px;
+}
+
+.banner_info ul {
+  text-transform: uppercase;
+  font-size: 1.12rem;
+  color: #707070;
+  font-weight: 100;
+}
+
+.banner_info li {
+  margin-bottom: 15px;
 }
 
 .banner_subtitle {
@@ -4041,6 +4054,11 @@ h3 {
 
 .banner_slide {
   text-align: right;
+  width: 50%;
+  left: 100%;
+  position: relative;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 .banner_slide img {
@@ -4090,6 +4108,19 @@ h3 {
       -ms-flex-direction: column;
           flex-direction: column;
   border-left: 1px solid #ABABAB;
+}
+
+.banner .buttom.alone {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.banner .buttom.alone .ico.shop {
+  width: 119px;
+  height: 70px;
+  background-color: #A81E1E;
+  background-position: center 7px;
 }
 
 /*Contacto*/
@@ -4413,4 +4444,103 @@ h3 {
 
 .bio_text {
   color: #878787;
+}
+
+/*carrusel de biblioteca*/
+.find {
+  padding: 110px 15px;
+}
+
+.find h2 {
+  text-align: center;
+  color: #A81E1E;
+  font-weight: normal;
+  margin-bottom: 15px;
+}
+
+.find_form {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.find_form fieldset {
+  border: none;
+}
+
+.find_form input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #A81E1E;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.find_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.find_img img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.find_list {
+  margin: 50px auto 0;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.find_item {
+  position: relative;
+  width: 712px;
+  height: 474px;
+  margin: 0 40px 50px;
+}
+
+.find_info {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  left: 100%;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  text-align: left;
+  min-width: 200px;
+  padding: 60px 15px 30px 15px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.find_subtitle {
+  color: #FFFFFF;
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.find_text {
+  color: #878787;
+  margin: 40px 0 50px;
+}
+
+.find_price {
+  color: #FFFFFF;
+  font-weight: normal;
+}
+
+.find_buttom {
+  position: absolute;
+  right: -28px;
+  bottom: -28px;
+}
+
+.find_buttom .ico.shop {
+  background-color: #0D0D0D;
 }
